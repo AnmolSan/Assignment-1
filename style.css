@@ -1,0 +1,150 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: url(./aaron-burden.jpg);
+    background-size: 100%;
+    background-position: 0px 0px;
+}
+.main > table{
+    margin: 5% auto;
+    width: 50vw;
+    /* background-color: rgb(243, 240, 217); */
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+    color: #fff;
+    text-align: center ;
+    
+}
+.main > table tr{
+    border-radius: 10px;
+}
+/* table{
+    border-collapse: collapse;
+    
+    
+    
+} */
+.col50{
+    width: 50%;
+    float:left;
+    text-align: left;
+}
+table.list{
+    margin-top: 20px;
+}
+/* td,th{
+    border: 1px solid grey;
+    text-align: left;
+    padding: 8px;
+} */
+tr:nth-child(even), table.list thead>tr{
+    background-color: rgba(177, 165, 165, 0.5);
+}
+input[type="text"], input[type="number"]{
+    width: 100%;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+
+}
+.col25{
+    float:left;
+    text-align: left;
+    width: 25%;
+    margin-top: 6px;
+}
+.col75{
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+label{
+    padding: 6px 6px 6px 0;
+    display: inline-block;
+}
+#male, #female{
+    margin: 14px;
+}
+select{
+    margin: 11px;
+    width: 90%;
+}
+.alignDiv{
+    margin: auto 25px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    max-height: 80vh;
+
+}
+#personIcon{
+    width: 75%;
+    height: auto;
+    filter:brightness(200%) contrast(120%);
+
+}
+form{
+    width: 100%;
+    height: auto;
+}
+.formActionButton{
+    float: right;
+    margin: 12px;
+}
+input[type="submit"], input[type="reset"]
+{
+    padding: 4px;
+    border-radius: 4px;
+}
+
+input:hover{
+    background-color: rgb(223, 236, 253);
+}
+input[type="submit"]{
+    background-color: #1266ab;
+    border: 1px solid black;
+    color: white;
+}
+
+input[type="reset"]{
+    background-color:#e8e5d0 ;
+
+}
+input[type="submit"]:hover
+{
+    background-color: #6190b6 ;    
+    border: 1px solid black;
+    color: white;
+}
+input[type="reset"]:hover{
+    background-color:#f3f2e8 ;
+
+}
+a{
+    color: rgb(228, 228, 228);
+}
+a:hover{
+    color: rgb(120, 146, 230);
+    cursor:pointer;
+}
+label.validation-error{
+    color: red;
+    margin-left: 160px;
+    font-style: italic;
+    font-family: monospace;
+    margin-top: 0.8em;
+    font-weight: bold;
+}
+.hide{
+    visibility: hidden;
+}

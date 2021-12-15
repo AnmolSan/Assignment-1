@@ -1,0 +1,9 @@
+https://itman.in/en/inline-elements-html5/
+
+https://blog.devgenius.io/css-display-flex-vs-block-inline-and-inline-block-explained-5fa588a3a960
+
+https://www.w3schools.com/cssref/pr_class_display.asp
+
+https://www.w3schools.com/css/tryit.asp?filename=trycss_grid
+
+https://www.youtube.com/watch?v=lAOkx2yZESY

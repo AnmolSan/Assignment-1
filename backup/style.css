@@ -1,0 +1,74 @@
+body{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+
+}
+form {
+    width: 50%;
+    height: auto;
+    text-align: left;
+    float: right;
+    margin: 1% auto;
+}
+
+ul{
+     list-style-type: none;
+     float: left;
+}
+li{
+    margin: 20px;
+}
+button {
+    margin: 10px;
+    text-align: center;
+}
+#gender{
+    margin: 10px;
+}
+.dataInput{
+    border: 2px solid #d8dee9;
+    width: 60%;
+    height: 300px;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin:5% auto auto;
+    background-color: #eceff4;
+}
+.personIconDiv{
+    width: 50%;
+    height:100%;
+    float: left;
+    margin: auto;
+
+}
+.personIcon{
+
+    width: auto;
+    height: 250px;
+    display: block;
+    margin: 5% auto;
+}
+.resultJsonOutput{
+    border: 2px solid #d8dee9;
+    width: 60%;
+    height: auto;
+    margin: 5% auto auto;
+    background-color: #eceff4;
+}
+table{
+    width: 100%;
+}
+td th{
+    border: 1px solid #d8dee9;
+    text-align: left;
+    padding: 8px;
+    width: 25%;
+}
+
+tr:nth-child(even){
+    background-color: aliceblue;
+}

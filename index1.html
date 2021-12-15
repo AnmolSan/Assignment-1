@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <table>
+            <tbody class="mainSub">
+                <tr>
+                    <td class="col50">
+                        <div class="alignDiv">
+                            <img id="personIcon" src="personIcon.png" alt="Person Icon">
+                        </div>
+                    </td>
+                    <td class="col50">
+                        <div class="alignDiv">
+                            <form onsubmit="event.preventDefault();onFormSubmit();"  autocomplete="off">
+                                
+                                <center><h3>Add/Update Person Form</h3></center>
+                                
+                                <div><label class="validation-error hide" id="allValidationError">Name, Gender and city is required.</label></div>
+                            
+                                <div class="col25">
+                                    <label for="name">Name:</label>
+                                </div>
+                                
+                                <div class="col75">
+                                    <input type="text" name="Name" id="name" placeholder="Full Name" >
+                                </div>
+                                
+                                
+                                <div class="col25">
+                                    <label for="gender">Gender:</label>
+                                </div>
+                                
+                                <div class="col75">
+                                    <input type="radio" name="Gender"   value="Male" class="male"   id="male"><span id="male" required>Male</span> 
+                                    <input type="radio" name="Gender" value="Female" class="female"   id="female"><span id="female">Female</span> 
+                                </div>
+
+                                <div class="col25">
+                                    <label for="age">Age:</label>
+                                </div>
+                                
+
+                                <div class="col75">
+                                    <input type="number" name="Age" id="Age"
+                                    min="0" max ="100" oninput="validity.valid||(value='');"
+                                    placeholder="Age" >
+                                </div>
+                            
+
+                                <div class="col25">
+                                    <label for="city">City:</label>
+                                </div>
+
+                                <div class="col75">
+                                    <select name="City" id="city">
+                                        <!-- called api for the list of cities in india -->
+                                    </select>
+                                </div>
+                                
+                                <div class="formActionButton">
+                                    <input type="reset" value="Reset">
+                                    <input 
+                                    type="submit" id="submit" value="Submit">
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <table class="list" id="personList">
+                        <thead>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>City</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                
+                </tr>
+            </tbody>
+        </table>
+        <script src="cityScript.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </div>    
+</body>
+</html>
