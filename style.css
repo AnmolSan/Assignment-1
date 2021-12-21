@@ -9,7 +9,7 @@ body{
     background-size: 100%;
     background-position: 0px 0px;
 }
-.main > table{
+body > table{
     margin: 5% auto;
     width: 50vw;
     /* background-color: rgb(243, 240, 217); */
@@ -21,7 +21,7 @@ body{
     text-align: center ;
     
 }
-.main > table tr{
+body > table tr{
     border-radius: 10px;
 }
 /* table{
@@ -30,12 +30,16 @@ body{
     
     
 } */
+#personList{
+    width: 50vw;
+    text-align: center;
+}
 .col50{
     width: 50%;
     float:left;
     text-align: left;
 }
-table.list{
+table.display{
     margin-top: 20px;
 }
 /* td,th{
@@ -43,10 +47,10 @@ table.list{
     text-align: left;
     padding: 8px;
 } */
-tr:nth-child(even), table.list thead>tr{
+tr:nth-child(even), table.display thead>tr{
     background-color: rgba(177, 165, 165, 0.5);
 }
-input[type="text"], input[type="number"]{
+input[type="text"], input[type="date"]{
     width: 100%;
     padding: 12px;
     display: inline-block;
@@ -69,6 +73,13 @@ input[type="text"], input[type="number"]{
 label{
     padding: 6px 6px 6px 0;
     display: inline-block;
+    margin-top: 4px;
+}
+.col33{
+    display: inline-flex;
+    width: 31%;
+    margin-top: 6px;
+
 }
 #male, #female{
     margin: 14px;
