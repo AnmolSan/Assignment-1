@@ -156,7 +156,9 @@ function readFormData()
     return formData;
 }
 var counter;
-
+// if(window.counter!=0){
+//     rowSelection();
+// }
 function onFormSubmit()
 {
     
@@ -175,71 +177,79 @@ function onFormSubmit()
     }
     console.log("onSubmit",dataSet[1]);
     
-    if ( $.fn.DataTable.isDataTable( '#personList' ) ) {
-        dataTableInsertRow(dataSet);
-    }
-    else{
+    if ( !$.fn.DataTable.isDataTable( '#personList' ) ) {
         dataTabeInitialization([dataSet]);
         selection = true;
+    }
+    else{
+        dataTableInsertRow(dataSet);
         
     }
     
     
     resetForm(); 
-        
-    // counter++;
+    
     }
+    // counter++;
+}
+    
     
 
-}
 
 
 function dataTabeInitialization(dataSet)
 {
     
-  $(document).ready(function() {
-     $('#personList').DataTable( {
-         data: dataSet, 
-         "dom": '<"top"i>rt<"bottom"flp><"clear">',
-         columns: [
-             { title: "Name" },
-             { title: "Gender" },
-             { title: "DOB" },
-             { title: "Country" },
-             { title: "State" },
-             { title: "City" }
-         ] 
-     } );
-  } );
-  window.counter+=1;
+
+    $('#personList').DataTable( {
+        data: dataSet, 
+        "dom": '<"top"i>rt<"bottom"flp><"clear">',
+        columns: [
+            { title: "Name" },
+            { title: "Gender" },
+            { title: "DOB" },
+            { title: "Country" },
+            { title: "State" },
+            { title: "City" }
+        ] 
+    } );
+
+  rowSelection();
  
 }
-function dataTableInsertRow(dataSet){
-    var t = $('#personList').DataTable();
-    t.row.add(dataSet).draw();
-    window.counter=window.counter + 1;
+function rowSelection()
+{
     
-}
-
-function rowSelection(){
     $(document).ready(function() {
+        if ( $.fn.DataTable.isDataTable( '#personList' ) ){
         var t = $('#personList').DataTable();
     
-        $('#personList tbody').on('click','tr', function(){
-            if($(this).hasClass('selected')){
-                $(this).removeClass('selected');
-            }
-            else{
-                t.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-        });
+            $('#personList tbody').on('click','tr', function(){
+                if($(this).hasClass('selected')){
+                    $(this).removeClass('selected');
+                }
+                else{
+                    t.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+        
+            $('.delete').click( function () {
+                t.row('.selected').remove().draw( false );
+                console.log(t.row('.selected').remove().draw( true ))
+            } );
+            $('.edit').click(function(){
+                t.row('selected').edit( {
+                    buttons: [
+                        { label: 'Cancel', fn: function () { this.close(); } },
+                        'Edit'
+                    ]
+                } );
+            });
+        }
     
-        $('.delete').click( function () {
-            t.row('.selected').remove().draw( false );
-            console.log(t.row('.selected').remove().draw( true ))
-        } );
     });
+    
     
     // $(document).ready(function() {
     //     editor = new $.fn.dataTable.Editor( {
@@ -292,11 +302,15 @@ function rowSelection(){
 
     
 
-
-} 
-if(window.counter!=0){
-    rowSelection();
 }
+
+function dataTableInsertRow(dataSet){
+    var t = $('#personList').DataTable();
+    t.row.add(dataSet).draw();
+    window.counter=window.counter + 1;
+    
+}
+
 
 
 function resetForm()
