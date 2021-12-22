@@ -102,21 +102,17 @@ document.getElementById('Age').addEventListener('focusin', () => {
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById('Age').setAttribute('max',today);
 })
-// addEventListener('DOMContentLoaded', () => {
 
-//     $('#personList').DataTable();
-// })
-if (counter<=1){
-    rowSelection();
-}
-var counter = 0;
+
+
 
 function validate(){
     isValid = true;
     var emptyName=document.getElementById('name').value==''
     var FalseRadio=document.getElementById('male').checked == false && document.getElementById('female').checked ==false
-    var emptyCity=document.getElementById('city').value==''
-    if((emptyName)||(FalseRadio)||(emptyCity)){
+    var emptyCountry=document.getElementById('country').value==''
+    var emptyState=document.getElementById('state').value==''
+    if((emptyName)||(FalseRadio)||(emptyCountry)||(emptyState)){
         isValid = false;
         document.getElementById('allValidationError').classList.remove("hide");
     }
@@ -129,7 +125,8 @@ function validate(){
     }
     return isValid;
 }
-
+var selection = false;
+var editor;
 function readFormData()
 {
     var male = document.querySelector(".male");
@@ -158,6 +155,7 @@ function readFormData()
 
     return formData;
 }
+var counter;
 
 function onFormSubmit()
 {
@@ -165,52 +163,62 @@ function onFormSubmit()
     const dataSet = [];
     
     if(validate()){
+        
+    
     var formData = {};
     formData = readFormData();
     document.getElementById('personList').classList.remove('hide');
     
-    if(selectedR == null){
+    
     for (let i in formData) {
         dataSet.push(formData[i])
     }
     console.log("onSubmit",dataSet[1]);
-    dataTabeInitialization(dataSet);
-    // }
-        
-    // else{
-    //     updateList(formData);
-    // }
-    resetForm(); 
-    }     
-    counter ++;
+    
+    if ( $.fn.DataTable.isDataTable( '#personList' ) ) {
+        dataTableInsertRow(dataSet);
     }
+    else{
+        dataTabeInitialization([dataSet]);
+        selection = true;
+        
+    }
+    
+    
+    resetForm(); 
+        
+    // counter++;
+    }
+    
 
 }
 
+
 function dataTabeInitialization(dataSet)
 {
-    var t = $('#personList').DataTable({
-        "columnDefs":[{
-            'data': null,
-            'defaultContent':"<button type='button' class='btn purple-gradient btn-sm'>Edit</button>",
-            'targets':-1
-        }]
-    });
-    t.row.add(dataSet).draw();
     
-// $(document).ready(function() {
-//     $('#personList').DataTable( {
-//         data: dataSet, 
-//         columns: [
-//             { title: "Name" },
-//             { title: "Gender" },
-//             { title: "DOB" },
-//             { title: "Country" },
-//             { title: "State" },
-//             { title: "City" }
-//         ] 
-//     } );
-// } );
+  $(document).ready(function() {
+     $('#personList').DataTable( {
+         data: dataSet, 
+         "dom": '<"top"i>rt<"bottom"flp><"clear">',
+         columns: [
+             { title: "Name" },
+             { title: "Gender" },
+             { title: "DOB" },
+             { title: "Country" },
+             { title: "State" },
+             { title: "City" }
+         ] 
+     } );
+  } );
+  window.counter+=1;
+ 
+}
+function dataTableInsertRow(dataSet){
+    var t = $('#personList').DataTable();
+    t.row.add(dataSet).draw();
+    window.counter=window.counter + 1;
+    
 }
 
 function rowSelection(){
@@ -226,9 +234,70 @@ function rowSelection(){
                 $(this).addClass('selected');
             }
         });
+    
+        $('.delete').click( function () {
+            t.row('.selected').remove().draw( false );
+            console.log(t.row('.selected').remove().draw( true ))
+        } );
     });
     
+    // $(document).ready(function() {
+    //     editor = new $.fn.dataTable.Editor( {
+    //         // ajax: "",
+    //         table: "personList",
+    //         fields: [ {
+    //                 label: "Name",
+    //                 name: "users.name"
+    //             }, {
+    //                 label: "Gender",
+    //                 name: "users.gender"
+    //             }, {
+    //                 label: "DOB",
+    //                 name: "users.DOB",
+    //             }, {
+    //                 label: "Country",
+    //                 name: "users.country",
+    //             }, {
+    //                 label: "State",
+    //                 name: "users.state",
+    //             }, {
+    //                 label: "City:",
+    //                 name: "users.city",
+    //             }
+    //         ]
+        
+    //     } );
+    //     $('personList').DataTable( {
+    //         dom: "Bfrtip",
+    //         // ajax: {
+    //         //     url: "../php/join.php",
+    //         //     type: 'POST'
+    //         // },
+    //         columns: [
+    //             { data: "users.name" },
+    //             { data: "users.gender" },
+    //             { data: "users.DOB" },
+    //             { data: "users.country" },
+    //             { data: "users.state" },
+    //             { data: "users.city" }
+    //         ],
+    //         select: true,
+    //         buttons: [
+    //             { extend: "create", editor: editor },
+    //             { extend: "edit",   editor: editor },
+    //             { extend: "remove", editor: editor }
+    //         ]
+    //     } );
+    // } );
+
+    
+
+
+} 
+if(window.counter!=0){
+    rowSelection();
 }
+
 
 function resetForm()
 {
@@ -241,7 +310,4 @@ function resetForm()
     document.getElementById("city").value = '';
     document.getElementById("state").value = '';
     document.getElementById("country").value = '';
-    
-    
-    selectedR = null;
 }

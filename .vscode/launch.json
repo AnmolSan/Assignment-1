@@ -9,17 +9,22 @@
                 "name": "Attach to url with files served from ./out",
                 "type": "firefox",
                 "request": "attach",
-                "port": 9222,
-                "url": "<url of the open browser tab to connect to>",
+                "port": 5500,
+                "url": "http://127.0.0.1:5500/index1.html",
                 "webRoot": "${workspaceFolder}/out"
             },
-            
             {
                 "name": "Launch localhost",
                 "type": "firefox",
                 "request": "launch",
-                "url": "http://localhost/index.html",
-                "webRoot": "${workspaceFolder}/wwwroot"
+                "url": "http://127.0.0.1:5500/index1.html",
+                "webRoot": "${workspaceFolder}",
+                "pathMappings": [
+                    {
+                        "url": "http://127.0.0.1:5500",
+                        "path": "${workspaceFolder}"
+                    }
+                ]
             },
             {
                 "name": "Launch index.html",
