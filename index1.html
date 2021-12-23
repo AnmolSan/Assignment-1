@@ -7,6 +7,7 @@
     <title>Forum 2</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
+    <link rel="stylesheet" type="text/css" href="chosen_v1.8.7/chosen.css"/>
     
 
     <!-- <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/> -->
@@ -14,9 +15,9 @@
 </head>
 <body>
     <table>
-        <tbody>
+        <tbody class="grid-tbodyContainer">
             <tr>
-                <td class="col50">
+                <td class="col50 ">
                     <div class="alignDiv">
                         <img id="personIcon" src="personIcon.png" alt="Person Icon">
                     </div>
@@ -42,9 +43,9 @@
                                 <label for="gender">Gender:</label>
                             </div>
                             
-                            <div class="col75">
-                                <input type="radio" name="Gender"   value="Male" class="male"   id="male"><span id="male" required>Male</span> 
-                                <input type="radio" name="Gender" value="Female" class="female"   id="female"><span id="female">Female</span> 
+                            <div class="col75 grid-container">
+                                <input type="radio" name="Gender"   value="Male" class="male item1"   id="male"><span id="male" class="item2" required>Male</span> 
+                                <input type="radio" name="Gender" value="Female" class="female item3"   id="female"><span id="female" class="item4">Female</span> 
                             </div>
 
                             <div class="col25">
@@ -59,10 +60,11 @@
                         
 
                             
-                            <div>
-                                <div class="col33">
-                                    <div>
+                            <div class="grid-container">
+                                <div class="grid-item">
+                                    <div id="locationLabel">
                                         <label for="country">Country</label>
+                                        
                                     </div>
                                     <div class="one_third">
                                         <select name="Country" id="country">
@@ -71,8 +73,8 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col33">
-                                    <div>
+                                <div class="grid-item">
+                                    <div id="locationLabel">
                                         <label for="state">State</label>
                                     </div>
                                     <div class="one_third">
@@ -81,8 +83,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col33">
-                                    <div>
+                                <div class="grid-item">
+                                    <div id="locationLabel">
                                         <label for="city">City</label>
                                     </div>
                                     <div class="one_third">
@@ -92,6 +94,32 @@
                                     </div>
                                 </div>
                             </div>
+                            <div>
+                                <span><label for="workDays">Working Days</label></span>
+                                <div class="multiselect">
+                                  <div class="selectBox" onclick="showCheckboxes();">
+                                    <select aria-placeholder="Enter Days" multiple class="chosen-select" name="Working Days">
+                                      <option>Select an option</option>
+                                      <option>Monday</option>
+                                      <option>Tuesday</option>
+                                      <option>wednesday</option>
+                                      <option>Thursday</option>
+                                      <option>Firday</option>
+                                      <option>Saturday</option>
+                                      <option>Sunday</option>
+                                    </select>
+                                    <!-- <div class="overSelect"></div>
+                                  </div> -->
+                                  <!-- <div id="checkboxes">
+                                    <label for="one">
+                                      <input type="checkbox" id="one" />First checkbox</label>
+                                    <label for="two">
+                                      <input type="checkbox" id="two" />Second checkbox</label>
+                                    <label for="three">
+                                      <input type="checkbox" id="three" />Third checkbox</label>
+                                  </div>
+                                </div> -->
+                              </div>
                             
                             <div class="formActionButton">
                                 <input type="reset" value="Reset">
@@ -102,16 +130,15 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td class="buttonDiv">
+            <!-- <tr>
+                <td>
                     <div id="EditDeleteDiv">
                         <button class="button edit">Edit</button>
                         <button class="button delete">Delete</button>
                     </div>
                 </td>
-            </tr>
+            </tr> -->
             <tr>
-                
                 
                 <table class="display hide" id="personList" width="80vw">
                     
@@ -119,29 +146,36 @@
                         
                         <tr>
                             
+                            <!-- <th></th> -->
+                            <th>Sr.No</th>
                             <th>Name</th>
                             <th>Gender</th>
                             <th>DOB</th>
                             <th>Country</th>
                             <th>State</th>
                             <th>City</th>
+                            
                         </tr>
                        
                     </thead>
 
                     <tfoot>
                         <tr>
+                            <!-- <th></th> -->
+                             <th>Sr.No</th>
                             <th>Name</th>
                             <th>Gender</th>
                             <th>DOB</th>
                             <th>Country</th>
                             <th>State</th>
                             <th>City</th>
+                            
                         </tr>
                     </tfoot>
 
                     
                 </table>
+            
             
             </tr>
         </tbody>
@@ -149,6 +183,7 @@
     <!-- <script type="text/javascript" src="cityScript.js"></script> -->
     <script type="text/javascript" src="jquery-3.5.1.js"></script>
     <script type="text/javascript" src="tableScript.js"></script>
+    <script type="text/javascript" src="chosen_v1.8.7/chosen.jquery.js"></script>
     <script type="text/javascript" src="DataTables/datatables.js"></script>
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
         

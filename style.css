@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 body{
-    background: url(./aaron-burden.jpg);
+    background: url(./back2.jpg);
     background-size: 100%;
     background-position: 0px 0px;
 }
@@ -30,10 +30,11 @@ body > table tr{
     
     
 } */
-#personList{
+/* #personList{
     width: 50vw;
     text-align: center;
-}
+    border: 1px solid red ;
+} */
 .col50{
     width: 50%;
     float:left;
@@ -47,9 +48,9 @@ table.display{
     text-align: left;
     padding: 8px;
 } */
-tr:nth-child(even), table.display thead>tr{
+/* tr:nth-child(even), table.display thead>tr{
     background-color: rgba(177, 165, 165, 0.5);
-}
+} */
 input[type="text"], input[type="date"]{
     width: 100%;
     padding: 12px;
@@ -75,10 +76,15 @@ label{
     display: inline-block;
     margin-top: 4px;
 }
-.col33{
-    display: inline-flex;
-    width: 31%;
-    margin-top: 6px;
+.grid-container{
+    display: grid;
+    grid-template-areas:'maleInput maleLabel femaleInput femaleLabel';
+    grid-template-columns: auto auto auto;
+    padding: 1px;
+}
+.grid-item{
+    
+    text-align: center;
 
 }
 #male, #female{
@@ -91,11 +97,14 @@ select{
 .alignDiv{
     margin: auto 25px;
     width: auto;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     min-height: 60vh;
     max-height: 80vh;
+    /* grid-template-areas:
+    '1'
+    '2' */
 
 }
 #personIcon{
@@ -111,11 +120,14 @@ form{
 .formActionButton{
     float: right;
     margin: 12px;
+    
 }
 input[type="submit"], input[type="reset"]
 {
     padding: 4px;
     border-radius: 4px;
+    float: right;
+    margin: 1%;
 }
 
 input:hover{
@@ -159,3 +171,60 @@ label.validation-error{
 .hide{
     visibility: hidden;
 }
+#personList_wrapper {
+    width: 80%;
+    text-align: center;
+    margin: 5% auto;
+
+}
+.buttonDiv{
+    margin: 5% auto;
+}
+.delete, .edit{
+    padding: 4px;
+    border-radius: 4px;
+
+}
+.item1 { grid-area: maleInput; }
+.item2 { grid-area: maleLabel; }
+.item3 { grid-area: femaleInput; }
+.item4 { grid-area: femaleLabel; }
+
+.multiselect{
+    width: 200px;
+
+}
+.selectBox{
+    position: relative;
+}
+.selectBox select{
+    width: 100%;
+    font-weight: bold;
+}
+.overSelect{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+  }
+#checkboxes label{
+    display: block;
+}
+#checkboxes label:hover{
+
+    background-color:#1e90ff ;
+}
+/* .alignDiv form{
+    
+    grid-area: 1;
+} */
+/* .alignDiv .formActionButton{
+
+    
+    
+} */

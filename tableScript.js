@@ -24,7 +24,7 @@ document.getElementById('country').addEventListener('focus', () => {
 });
 
 //code to return list of state on the selected country-----------------
-document.getElementById('state').addEventListener('focus',() => {
+document.getElementById('state').addEventListener('focusin',() => {
     document.querySelector("#country");
     let selectedCountry = {};
     selectedCountry["country"] = readFormData().Country;
@@ -58,7 +58,7 @@ document.getElementById('state').innerHTML = output
 })
 
 //code to return list of city on the selected city---------------------
-document.getElementById('city').addEventListener('focus',() => {
+document.getElementById('city').addEventListener('focusin',() => {
     document.querySelector("#state");
     let postInput = {};
     postInput["country"] = readFormData().Country;
@@ -104,7 +104,7 @@ document.getElementById('Age').addEventListener('focusin', () => {
 })
 
 
-
+var ID = 0;
 
 function validate(){
     isValid = true;
@@ -133,6 +133,7 @@ function readFormData()
     var female = document.querySelector(".female");
     
     var formData = {};
+    formData["ID"] = window.ID
     formData["Name"] = document.getElementById("name").value;
     if(male.checked==true){
         formData["Gender"] = "Male";
@@ -152,6 +153,7 @@ function readFormData()
     formData["Country"] = document.getElementById("country").value;
     formData["State"] = document.getElementById("state").value;
     formData["City"] = document.getElementById("city").value;
+    
 
     return formData;
 }
@@ -166,7 +168,7 @@ function onFormSubmit()
     
     if(validate()){
         
-    
+    window.ID+=1;
     var formData = {};
     formData = readFormData();
     document.getElementById('personList').classList.remove('hide');
@@ -175,19 +177,21 @@ function onFormSubmit()
     for (let i in formData) {
         dataSet.push(formData[i])
     }
-    console.log("onSubmit",dataSet[1]);
+    console.log("onSubmit",formData);
     
     if ( !$.fn.DataTable.isDataTable( '#personList' ) ) {
-        dataTabeInitialization([dataSet]);
+        dataTabeInitialization([formData]);
         selection = true;
     }
     else{
-        dataTableInsertRow(dataSet);
+        dataTableInsertRow([formData]);
+        console.log('dataSet',dataSet)
         
     }
     
     
     resetForm(); 
+    
     
     }
     // counter++;
@@ -199,22 +203,107 @@ function onFormSubmit()
 
 function dataTabeInitialization(dataSet)
 {
+    var editor;
     
-
-    $('#personList').DataTable( {
-        data: dataSet, 
-        "dom": '<"top"i>rt<"bottom"flp><"clear">',
-        columns: [
-            { title: "Name" },
-            { title: "Gender" },
-            { title: "DOB" },
-            { title: "Country" },
-            { title: "State" },
-            { title: "City" }
-        ] 
+    
+    $(document).ready(function() {
+        editor = new $.fn.DataTable.Editor( {
+            
+            table: "#personList",
+            idSrc:'ID',
+            fields: [ {
+                label: "Name",
+                name: "Name"
+            }, {
+                label: "Gender",
+                name: "Gender"
+            }, {
+                label: "DOB",
+                name: "DOB",
+            }, {
+                label: "Country",
+                name: "Country",
+            }, {
+                label: "State",
+                name: "State",
+            }, {
+                label: "City",
+                name: "City",
+            }
+        ]
+        
+    } );
+    $('personList').on( 'click', 'tbody td:not(:first-child)', function (e) {
+        editor.inline( this, {
+            submit: 'allIfChanged'
+        } );
     } );
 
-  rowSelection();
+    $('#personList').DataTable( {
+        dom: "Bfrtip",
+        data: dataSet, 
+        // "dom": '<"top"i>rt<"bottom"flp><"clear">',   
+        columns: [
+            // { title: "Name" },
+            // { title: "Gender" },
+            // { title: "DOB" },
+            // { title: "Country" },
+            // { title: "State" },
+            // { title: "City" },
+            // { title: "" },
+            // { title: "" },
+            // {
+            //     data: null,
+            //     defaultContent: '',
+            //     className: 'select-checkbox',
+            //     orderable: false
+            // },
+            {  data: "ID" },
+            {  data: "Name" },
+            {  
+                data: "Gender" },
+            { 
+                data: "DOB" },
+            { 
+                data: "Country" },
+            { 
+                data: "State" },
+            { 
+                data: "City" }
+        ],
+        order: [ 1, 'asc' ],
+        select: {
+            style:    'os',
+            selector: 'tr'
+        },
+            buttons: [
+                { extend: "edit",   editor: editor },
+                { extend: "remove", editor: editor }
+            ]
+
+    } );
+    
+    // $('personList').DataTable( {
+        //     dom: "Bfrtip",
+        //     data:dataSet,
+        //     columns: [
+            //         { data: "users.name" },
+            //         { data: "users.gender" },
+            //         { data: "users.DOB" },
+            //         { data: "users.country" },
+            //         { data: "users.state" },
+        //         { data: "users.city" }
+        //     ],
+        //     select: true,
+        //     buttons: [
+        //         { extend: "edit",   editor: editor },
+        //         { extend: "remove", editor: editor }
+        //     ]
+        // } );
+    } );
+
+
+//   rowSelection();
  
 }
 function rowSelection()
@@ -248,66 +337,21 @@ function rowSelection()
             });
         }
     
+        
     });
     
     
-    // $(document).ready(function() {
-    //     editor = new $.fn.dataTable.Editor( {
-    //         // ajax: "",
-    //         table: "personList",
-    //         fields: [ {
-    //                 label: "Name",
-    //                 name: "users.name"
-    //             }, {
-    //                 label: "Gender",
-    //                 name: "users.gender"
-    //             }, {
-    //                 label: "DOB",
-    //                 name: "users.DOB",
-    //             }, {
-    //                 label: "Country",
-    //                 name: "users.country",
-    //             }, {
-    //                 label: "State",
-    //                 name: "users.state",
-    //             }, {
-    //                 label: "City:",
-    //                 name: "users.city",
-    //             }
-    //         ]
-        
-    //     } );
-    //     $('personList').DataTable( {
-    //         dom: "Bfrtip",
-    //         // ajax: {
-    //         //     url: "../php/join.php",
-    //         //     type: 'POST'
-    //         // },
-    //         columns: [
-    //             { data: "users.name" },
-    //             { data: "users.gender" },
-    //             { data: "users.DOB" },
-    //             { data: "users.country" },
-    //             { data: "users.state" },
-    //             { data: "users.city" }
-    //         ],
-    //         select: true,
-    //         buttons: [
-    //             { extend: "create", editor: editor },
-    //             { extend: "edit",   editor: editor },
-    //             { extend: "remove", editor: editor }
-    //         ]
-    //     } );
-    // } );
 
     
 
 }
 
 function dataTableInsertRow(dataSet){
-    var t = $('#personList').DataTable();
-    t.row.add(dataSet).draw();
-    window.counter=window.counter + 1;
+    
+    $(document).ready(function() {
+        var t = $('#personList').DataTable();
+        t.row.add(dataSet).draw();
+});
     
 }
 
@@ -325,3 +369,18 @@ function resetForm()
     document.getElementById("state").value = '';
     document.getElementById("country").value = '';
 }
+var expanded = false;
+function showCheckboxes(){
+    var checkboxes = document.getElementById("checkboxes");
+    if (!expanded){
+        checkboxes.style.display = "block";
+        expanded = true;
+    }
+    else{
+        checkboxes.style.display = "none";
+        expanded = false
+    }
+}
+$(".chosen-select").chosen({
+    no_results_text: "Oops, nothing found!"
+  })
