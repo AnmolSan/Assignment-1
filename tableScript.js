@@ -149,7 +149,10 @@ function readFormData()
     else{
         formData["DOB"] = document.getElementById("Age").value;
     }
+
     
+    formData["Working Days"] = multiDaysSelect();
+
     formData["Country"] = document.getElementById("country").value;
     formData["State"] = document.getElementById("state").value;
     formData["City"] = document.getElementById("city").value;
@@ -191,6 +194,7 @@ function onFormSubmit()
     
     
     resetForm(); 
+    chosenInit()
     
     
     }
@@ -220,6 +224,9 @@ function dataTabeInitialization(dataSet)
             }, {
                 label: "DOB",
                 name: "DOB",
+            }, {
+                label: "Working Days",
+                name: "Working Days",
             }, {
                 label: "Country",
                 name: "Country",
@@ -264,6 +271,8 @@ function dataTabeInitialization(dataSet)
                 data: "Gender" },
             { 
                 data: "DOB" },
+            { 
+                data: "Working Days" },
             { 
                 data: "Country" },
             { 
@@ -368,6 +377,9 @@ function resetForm()
     document.getElementById("city").value = '';
     document.getElementById("state").value = '';
     document.getElementById("country").value = '';
+    
+    $('.chosen-select option').prop('selected', false).trigger('chosen:updated');
+        
 }
 var expanded = false;
 function showCheckboxes(){
@@ -381,6 +393,33 @@ function showCheckboxes(){
         expanded = false
     }
 }
-$(".chosen-select").chosen({
-    no_results_text: "Oops, nothing found!"
-  })
+function chosenInit(){
+    $(".chosen-select").chosen({
+        no_results_text: "Oops, nothing found!",
+        max_selected_options: 5,
+        allow_single_deselect: false
+    })
+
+    $(".chosen-select").bind("chosen:maxselected", function () { 
+        alert("5 Days maximum"
+        )}); 
+
+}
+chosenInit()
+// $("#country").chosen({
+// no_results_text: "Oops, nothing found!"
+
+// })
+
+
+function multiDaysSelect(){
+
+    let searchChoice =[];
+    $(".search-choice").each(function() {
+        $(this).children("span").each(function() {
+            searchChoice.push(this.innerHTML);
+        });
+      });
+      console.log('sear', searchChoice)
+      return searchChoice;
+}
