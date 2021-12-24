@@ -1,6 +1,6 @@
 //code to return list of country from api------------------------------
 
-document.getElementById('country').addEventListener('focus', () => {
+window.addEventListener('load', () => {
     const selectCountry = document.querySelector('#country'); //Add select id or class here 
 
 
@@ -16,6 +16,11 @@ document.getElementById('country').addEventListener('focus', () => {
             output += `<option>${count}</option>`;
         })
         selectCountry.innerHTML = output
+        $("#country").chosen({
+            no_results_text: "Oops, nothing found!"
+            ,width:"auto"
+            
+            })
         
 }).catch(err => {
         console.log(err);
@@ -49,8 +54,13 @@ raw.forEach(count => {
     
     output += `<option>${count}</option>`;
 })
-document.getElementById('state').innerHTML = output  
+document.getElementById('state').innerHTML = output  ;
+$("#state").chosen({
+    no_results_text: "Oops, nothing found!"
+    ,width:"auto"
+    })
 })
+
 .catch((error) => {
   console.error('Error:', error);
 });
@@ -85,9 +95,14 @@ raw.forEach(count => {
     
     output += `<option>${count}</option>`;
 })
-document.getElementById('city').innerHTML = output  
+document.getElementById('city').innerHTML = output;
+$("#city").chosen({
+    no_results_text: "Oops, nothing found!"
+    ,width:"auto"
+    })
 
 })
+
 .catch((error) => {
   console.error('Error:', error);
 });
@@ -280,7 +295,7 @@ function dataTabeInitialization(dataSet)
             { 
                 data: "City" }
         ],
-        order: [ 1, 'asc' ],
+        // order: [ 1, 'asc' ],
         select: {
             style:    'os',
             selector: 'tr'
@@ -406,10 +421,7 @@ function chosenInit(){
 
 }
 chosenInit()
-// $("#country").chosen({
-// no_results_text: "Oops, nothing found!"
 
-// })
 
 
 function multiDaysSelect(){
@@ -423,3 +435,8 @@ function multiDaysSelect(){
       console.log('sear', searchChoice)
       return searchChoice;
 }
+
+$(window).on('load', function () {
+    $('#loading').hide();
+  })
+
