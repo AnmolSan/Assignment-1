@@ -219,7 +219,7 @@ function onFormSubmit()
     
 
 
-
+//data table initialization with editor 
 function dataTabeInitialization(dataSet)
 {
     var editor;
@@ -305,7 +305,16 @@ function dataTabeInitialization(dataSet)
                 { extend: "remove", editor: editor }
             ]
 
-    } );
+    } )
+
+    // to change the color of the button if needed -------
+
+    // let table =  $('#personList').DataTable()
+    
+    // table.button(0).nodes().css('background', 'white');
+    // table.button(1).nodes().css('background', 'white');
+    //--------------------------------------------------
+    
     
     // $('personList').DataTable( {
         //     dom: "Bfrtip",
@@ -330,46 +339,48 @@ function dataTabeInitialization(dataSet)
 //   rowSelection();
  
 }
-function rowSelection()
-{
+
+
+
+// to have our own select Delete and edit button 
+// function rowSelection()
+// {
     
-    $(document).ready(function() {
-        if ( $.fn.DataTable.isDataTable( '#personList' ) ){
-        var t = $('#personList').DataTable();
+//     $(document).ready(function() {
+//         if ( $.fn.DataTable.isDataTable( '#personList' ) ){
+//         var t = $('#personList').DataTable();
     
-            $('#personList tbody').on('click','tr', function(){
-                if($(this).hasClass('selected')){
-                    $(this).removeClass('selected');
-                }
-                else{
-                    t.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
+//             $('#personList tbody').on('click','tr', function(){
+//                 if($(this).hasClass('selected')){
+//                     $(this).removeClass('selected');
+//                 }
+//                 else{
+//                     t.$('tr.selected').removeClass('selected');
+//                     $(this).addClass('selected');
+//                 }
+//             });
         
-            $('.delete').click( function () {
-                t.row('.selected').remove().draw( false );
-                console.log(t.row('.selected').remove().draw( true ))
-            } );
-            $('.edit').click(function(){
-                t.row('selected').edit( {
-                    buttons: [
-                        { label: 'Cancel', fn: function () { this.close(); } },
-                        'Edit'
-                    ]
-                } );
-            });
-        }
+//             $('.delete').click( function () {
+//                 t.row('.selected').remove().draw( false );
+//                 console.log(t.row('.selected').remove().draw( true ))
+//             } );
+//             $('.edit').click(function(){
+//                 t.row('selected').edit( {
+//                     buttons: [
+//                         { label: 'Cancel', fn: function () { this.close(); } },
+//                         'Edit'
+//                     ]
+//                 } );
+//             });
+//         }
     
         
-    });
-    
-    
+//     });
+// }
 
-    
 
-}
 
+// to insert a new row to the data table dynamically. which is not working as of now for some unknown reason......
 function dataTableInsertRow(dataSet){
     
     $(document).ready(function() {
@@ -380,7 +391,7 @@ function dataTableInsertRow(dataSet){
 }
 
 
-
+// to Reset form field 
 function resetForm()
 {
     document.getElementById("name").value = '';
@@ -397,17 +408,7 @@ function resetForm()
         
 }
 var expanded = false;
-function showCheckboxes(){
-    var checkboxes = document.getElementById("checkboxes");
-    if (!expanded){
-        checkboxes.style.display = "block";
-        expanded = true;
-    }
-    else{
-        checkboxes.style.display = "none";
-        expanded = false
-    }
-}
+// 
 function chosenInit(){
     $(".chosen-select").chosen({
         no_results_text: "Oops, nothing found!",
@@ -423,9 +424,8 @@ function chosenInit(){
 chosenInit()
 
 
-
+// to get the input from Days multiSelect 
 function multiDaysSelect(){
-
     let searchChoice =[];
     $(".search-choice").each(function() {
         $(this).children("span").each(function() {
@@ -436,6 +436,7 @@ function multiDaysSelect(){
       return searchChoice;
 }
 
+//load image 
 $(window).on('load', function () {
     $('#loading').hide();
   })

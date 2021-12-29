@@ -5,9 +5,9 @@
     box-sizing: border-box;
 }
 body{
-    background: url(./back2.jpg);
+    background: url(./images/background.jpg);
     background-size: 100%;
-    background-position: 0px 0px;
+    background-position:  0px 900px;
 }
 #loading{
     position: fixed;
@@ -60,7 +60,7 @@ body > table tr{
     float:left;
     text-align: left;
 }
-table.display{
+.display{
     margin-top: 20px;
 }
 /* td,th{
