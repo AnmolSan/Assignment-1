@@ -96,7 +96,6 @@ $("#state").chosen({
 
 //code to return list of city on the selected city---------------------
 document.getElementById('city').addEventListener('focusin',() => {
-    document.querySelector("#state");
     let postInput = {};
     postInput["country"] = readFormData().Country;
     postInput["state"] = readFormData().State;
@@ -146,7 +145,7 @@ document.getElementById('Age').addEventListener('focusin', () => {
 })
 
 
-var ID = 0;
+var ID = 0; //  serializing by addind incremental function to a new row in DataTable  
 
 function validate(){
     isValid = true;
@@ -167,8 +166,6 @@ function validate(){
     }
     return isValid;
 }
-var selection = false;
-var editor;
 function readFormData()
 {
     var male = document.querySelector(".male");
@@ -191,8 +188,6 @@ function readFormData()
     else{
         formData["DOB"] = document.getElementById("Age").value;
     }
-
-    
     formData["Working Days"] = multiDaysSelect();
 
     formData["Country"] = document.getElementById("country").value;
@@ -202,10 +197,6 @@ function readFormData()
 
     return formData;
 }
-var counter;
-// if(window.counter!=0){
-//     rowSelection();
-// }
 function onFormSubmit()
 {
     
@@ -226,33 +217,21 @@ function onFormSubmit()
     
     if ( !$.fn.DataTable.isDataTable( '#personList' ) ) {
         dataTabeInitialization([formData]);
-        selection = true;
     }
     else{
         dataTableInsertRow(formData);
-        console.log('dataSet',formData)
-        
+        // console.log('dataSet',formData)
     }
-    
-    
     resetForm(); 
-    chosenInit()
-    
-    
-    
     }
-    // counter++;
 }
     
     
 
 
 //data table initialization with editor 
-function dataTabeInitialization(dataSet)
-{
+function dataTabeInitialization(dataSet){
     var editor;
-    
-    
     $(document).ready(function() {
         editor = new $.fn.DataTable.Editor( {
             
@@ -292,7 +271,7 @@ function dataTabeInitialization(dataSet)
     $('#personList').DataTable( {
         dom: "Bfrtip",
         data: dataSet, 
-        // "dom": '<"top"i>rt<"bottom"flp><"clear">',   
+        // "dom": '<"top"i>rt<"bottom"flp><"clear">',   // to get search option below dataTable
         columns: [
             // { title: "Name" },
             // { title: "Gender" },
@@ -305,7 +284,7 @@ function dataTabeInitialization(dataSet)
             // {
             //     data: null,
             //     defaultContent: '',
-            //     className: 'select-checkbox',
+            //     className: 'select-checkbox',  // to get check box for visual easy of row selection
             //     orderable: false
             // },
             {  data: "ID" },
@@ -344,32 +323,12 @@ function dataTabeInitialization(dataSet)
     //--------------------------------------------------
     
     
-    // $('personList').DataTable( {
-        //     dom: "Bfrtip",
-        //     data:dataSet,
-        //     columns: [
-            //         { data: "users.name" },
-            //         { data: "users.gender" },
-            //         { data: "users.DOB" },
-            //         { data: "users.country" },
-            //         { data: "users.state" },
-        //         { data: "users.city" }
-        //     ],
-        //     select: true,
-        //     buttons: [
-        //         { extend: "edit",   editor: editor },
-        //         { extend: "remove", editor: editor }
-        //     ]
-        // } );
+   
     } );
 
 
-//   rowSelection();
  
 }
-
-
-
 // to have our own select Delete and edit button 
 // function rowSelection()
 // {
@@ -405,17 +364,13 @@ function dataTabeInitialization(dataSet)
         
 //     });
 // }
-
-
-
-// to insert a new row to the data table dynamically. which is not working as of now for some unknown reason......
+// to insert a new row to the data table dynamically.
 function dataTableInsertRow(dataSet){
     
     $(document).ready(function() {
         var t = $('#personList').DataTable();
         t.row.add(dataSet).draw();
-});
-    
+    });
 }
 
 
@@ -423,10 +378,12 @@ function dataTableInsertRow(dataSet){
 function resetForm()
 {
     document.getElementById("name").value = '';
-        var male = document.querySelector('.male');
-        var female = document.querySelector('.female');
-        male.checked = false;
-        female.checked = false;
+    
+    var male = document.querySelector('.male');
+    var female = document.querySelector('.female');
+    male.checked = false;
+    female.checked = false;
+    
     document.getElementById("Age").value = ''; 
     document.getElementById("city").value = '';
     document.getElementById("state").value = '';
@@ -439,7 +396,7 @@ function resetForm()
         
 }
 var expanded = false;
-// 
+
 function chosenInit(){
     $(".chosen-select").chosen({
         no_results_text: "Oops, nothing found!",
