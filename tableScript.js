@@ -27,6 +27,33 @@ window.addEventListener('load', () => {
     })
     
 });
+document.getElementById('country').addEventListener('focusin', () => {
+    const selectCountry = document.querySelector('#country'); //Add select id or class here 
+
+
+    fetch('https://countriesnow.space/api/v0.1/countries').then(res =>{
+        return res.json();
+    }).then(rawData => {
+        let output = "";
+        let raw=[]
+        for (let i in rawData.data) {
+            raw.push(rawData.data[i].country)
+        }
+        raw.forEach(count => {
+            output += `<option>${count}</option>`;
+        })
+        selectCountry.innerHTML = output
+        $("#country").chosen({
+            no_results_text: "Oops, nothing found!"
+            ,width:"auto"
+            
+            })
+        
+}).catch(err => {
+        console.log(err);
+    })
+    
+});
 
 //code to return list of state on the selected country-----------------
 document.getElementById('state').addEventListener('focusin',() => {
@@ -202,14 +229,15 @@ function onFormSubmit()
         selection = true;
     }
     else{
-        dataTableInsertRow([formData]);
-        console.log('dataSet',dataSet)
+        dataTableInsertRow(formData);
+        console.log('dataSet',formData)
         
     }
     
     
     resetForm(); 
     chosenInit()
+    
     
     
     }
@@ -405,6 +433,9 @@ function resetForm()
     document.getElementById("country").value = '';
     
     $('.chosen-select option').prop('selected', false).trigger('chosen:updated');
+    // $('#country').chosen('destroy');
+    $('#state').chosen('destroy');
+    $('#city').chosen('destroy');
         
 }
 var expanded = false;
